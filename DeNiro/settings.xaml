@@ -1,0 +1,22 @@
+﻿<Window x:Class="DeNiro.settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DeNiro"
+        mc:Ignorable="d"
+        Title="settings" Height="300" Width="300">
+    <StackPanel>
+        <TextBlock>Brightness</TextBlock>
+        <RadioButton GroupName="Os" Content="25%"/>
+        <RadioButton GroupName="Os" Content="50%" />
+        <RadioButton GroupName="Os" Content="75%" />
+        <RadioButton GroupName="Os" Content="100%" IsChecked="True" />
+        <TextBlock>Theme:</TextBlock>
+        <RadioButton GroupName="Office" Content="Default DeNiro" IsChecked="True"/>
+        <RadioButton GroupName="Office" Content="Yellow"/>
+        <RadioButton GroupName="Office" Content="Blue"/>
+    </StackPanel>
+    
+    
+</Window>
