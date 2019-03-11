@@ -1,0 +1,9 @@
+Dvd DeNiro application is .NET WPF based application that can export/import movies from .txt file and also add them manually via user interface.
+This application consists of few xaml pages that are nested inside iFrame. iFrame is displayed inside MainWindow with pre defined margins.
+By placing iFrame this way its, i was able to keep logo, menu and home icon at the top of user interface in every page.
+I have decided to use Movie.cs class to store movies inside movies list. To display movies in movies list (Show movies) xaml page, application
+iterate through movies list and display name,price,genre and year for each movie. DeNiro app. have some accessibility features
+such as: tooltips, keyboard shortcuts and font+. Font+ is custom-made event that enables user to enlarge font in movies list page when Font+
+is clicked. To make it more easy to use i have implemented event listener for 'ESC' key, which purpouse is to navigate to the homepage.
+Menu has: Quit, Restart and Settings items. If you click on settings, new window object will be created and displayed to the user together with 
+brightness and theme options. I havent implemented these settings features yet but i will in future.

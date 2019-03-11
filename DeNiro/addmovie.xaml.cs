@@ -15,15 +15,16 @@ namespace DeNiro
     public partial class addmovie : Page
     {
         public addmovie()
+
         {
+
             InitializeComponent();
+
         }
 
-        string image_path;
-
-
-        //Add Movie Button onClick
-        private void btn_add_movie_Click(object sender, RoutedEventArgs e)
+            string image_path;
+    //Add Movie Button onClick
+    private void btn_add_movie_Click(object sender, RoutedEventArgs e)
         {
             //Load data ::For testing only::
             //for(int i = 0; i < 10; i++)
@@ -100,5 +101,29 @@ namespace DeNiro
                 //MessageBox.Show(image_path);
             }
         }
+
+        private void btn_font_Click(object sender, RoutedEventArgs e)
+        {
+            if (btn_font.Content.ToString() == "_Font+")
+            {
+                addmovie addmovie = new addmovie();
+                this.NavigationService.Navigate(addmovie);
+                addmovie.btn_font.Content = "_Font-";
+                addmovie.input_genre.FontSize = 15;
+                addmovie.input_price.FontSize = 15;
+                addmovie.input_year.FontSize = 15;
+                addmovie.input_movie_name.FontSize = 15;
+                addmovie.tx_instructions.FontSize = 15;
+            }
+            else
+            {
+                addmovie addmovie1 = new addmovie();
+                this.NavigationService.Navigate(addmovie1);
+                addmovie1.btn_font.Content = "_Font+";
+                
+            }
+        }
+
     }
+
 }

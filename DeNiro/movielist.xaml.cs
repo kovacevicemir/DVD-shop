@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -46,6 +48,7 @@ namespace DeNiro
                 StackPanel sp = new StackPanel()
                 {
                     Name = "stackpanel" + i,
+                    
                 };
 
                 //Each stack panel settings
@@ -76,9 +79,28 @@ namespace DeNiro
                     HorizontalAlignment = HorizontalAlignment.Center,
                     FontSize = f_size
                     });
+
+                //Add upload picture button for each movie in the list
+                System.Windows.Controls.Button newBtn = new Button();
+
+                newBtn.Content = "Change picture";
+                newBtn.Name = "btn" + i.ToString();
+
+                //btn style
+                newBtn.HorizontalAlignment = HorizontalAlignment.Center;
+                newBtn.FontSize = 12;
+                newBtn.Background = new SolidColorBrush(Colors.White) { Opacity = 0.5 };
+                newBtn.Opacity = 0.92;
+                newBtn.Margin = new Thickness(5, 5, 5, 5);
+                newBtn.FontSize = f_size;
+                newBtn.Click += new RoutedEventHandler(btn_replace_Click);
+                sp.Children.Add(newBtn);
+
+                //Upload button ends here
+
             }
 
-            
+
             //::Ignore::Test only::
             //MessageBox.Show("current row " + current_row.ToString());
             //MessageBox.Show("current col " + current_col.ToString());
@@ -86,10 +108,46 @@ namespace DeNiro
             //MessageBox.Show("movie " + movie_count);
         }
 
+        string img_path;
+        private void btn_replace_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog file_dialog = new OpenFileDialog();
+            file_dialog.Title = "Select a picture";
+            file_dialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+                                 "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                                 "Portable Network Graphic (*.png)|*.png";
+            if (file_dialog.ShowDialog() == true)
+            {
+                img_path = file_dialog.FileName;
+
+                //get button Name (in order to find that specific movie -> and replace image source
+                string content = (sender as Button).Name;
+                //remove 'btn' from btn name
+                content =Regex.Replace(content, "[^0-9]", "");
+
+                Movie.Moviez[Int32.Parse(content)].image = img_path;
+                movielist movielist = new movielist(12);
+                this.NavigationService.Navigate(movielist);
+
+            }
+        }
+
         private void btn_font_Click(object sender, RoutedEventArgs e)
         {
-            movielist movielist = new movielist(20);
-            this.NavigationService.Navigate(movielist);
+            //Check if user wants to enlarge font, if its already 20px than (else) reduce it to 12
+            //and change btn content +-
+            if(btn_font.Content.ToString() == "_Font+")
+            {
+                movielist movielist = new movielist(20);
+                this.NavigationService.Navigate(movielist);
+                movielist.btn_font.Content = "_Font-";
+            }else
+            {
+                movielist movielist1 = new movielist(12);
+                this.NavigationService.Navigate(movielist1);
+                movielist1.btn_font.Content = "_Font+";
+            }
+            
         }
     }
 }
